@@ -57,22 +57,18 @@ let users = [
 
 function test(users) {
     let sum = 0;
-    let arrPhone = [];
-    let arrBallance = [];
     let arrPhoneBalance = [];
     users.forEach(element => {
-        sum += +element.balance.replace('$', '').replace(',', ''); 
-        arrPhone.push(element.phone);
-        arrBallance.push(+element.balance.replace('$', '').replace(',', ''));
-    });
-
-    for (i = 0; i <= arrBallance.length; i++) {
-        if (arrBallance[i] > 2000.00) {
-            arrPhoneBalance.push(arrPhone[i])
+        sum += +element.balance.replace('$', '').replace(',', '');         
+        
+        if (+element.balance.replace('$', '').replace(',', '') > 2000.00) {
+            arrPhoneBalance.push(element.phone)
         }
-    }
-
-    let arr = [sum.toFixed(2), arrPhoneBalance]
-    return arr;
+    });
+    
+    return {
+        sumBalanceUsers: sum.toFixed(2), 
+        listOfPhoneSortByLimit: arrPhoneBalance
+}
 } 
 console.log(test(users));
